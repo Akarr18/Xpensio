@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from './button';
+import { Button } from './ui/button';
 import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { LayoutDashboard, PenBox } from 'lucide-react';
@@ -41,12 +41,12 @@ const Header = () => {
    <SignedOut>
         <div className="flex gap-4">
           
-          <SignInButton mode="redirect" redirectUrl="/sign-in" forceRedirectUrl='/dashboard'>
-            <Button variant="outline">Login</Button>
-          </SignInButton>
-          <SignUpButton mode="redirect" redirectUrl="/sign-up" forceRedirectUrl='/dashboard'>
-            <Button variant="outline">Sign Up</Button>
-          </SignUpButton>
+          <SignInButton mode="redirect" redirecturl="/sign-in" forceRedirectUrl="/dashboard">
+  <Button variant="outline">Login</Button>
+</SignInButton>
+<SignUpButton mode="redirect" redirecturl="/sign-up" forceRedirectUrl="/dashboard">
+  <Button variant="outline">Sign Up</Button>
+</SignUpButton>
         </div>
       </SignedOut>
 
