@@ -5,7 +5,11 @@ import { Button } from './ui/button';
 import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { LayoutDashboard, PenBox } from 'lucide-react';
-const Header = () => {
+import { checkUser } from '@/lib/checkUser';
+import { redirect } from 'next/navigation';
+
+const Header = async() => {
+  await checkUser();
   return (
   <div className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
     <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
