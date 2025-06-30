@@ -326,8 +326,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.10.1
+   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
    */
   export type PrismaVersion = {
     client: string
@@ -6510,6 +6510,7 @@ export namespace Prisma {
 
   export type BudgetWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId_period?: BudgetUserIdPeriodCompoundUniqueInput
     AND?: BudgetWhereInput | BudgetWhereInput[]
     OR?: BudgetWhereInput[]
     NOT?: BudgetWhereInput | BudgetWhereInput[]
@@ -6521,7 +6522,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Budget"> | Date | string
     updatedAt?: DateTimeFilter<"Budget"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "userId_period">
 
   export type BudgetOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7332,6 +7333,11 @@ export namespace Prisma {
     in?: $Enums.BudgetPeriod[] | ListEnumBudgetPeriodFieldRefInput<$PrismaModel>
     notIn?: $Enums.BudgetPeriod[] | ListEnumBudgetPeriodFieldRefInput<$PrismaModel>
     not?: NestedEnumBudgetPeriodFilter<$PrismaModel> | $Enums.BudgetPeriod
+  }
+
+  export type BudgetUserIdPeriodCompoundUniqueInput = {
+    userId: string
+    period: $Enums.BudgetPeriod
   }
 
   export type BudgetCountOrderByAggregateInput = {

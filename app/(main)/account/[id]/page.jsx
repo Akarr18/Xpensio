@@ -1,13 +1,14 @@
- import { Suspense } from "react";
+import { Suspense } from "react";
 import { getAccountWithTransactions } from "@/actions/account";
-import { bulkDeleteTransactions } from "@/actions/account";
 import { BarLoader } from "react-spinners";
 import { TransactionTable } from "../_components/transaction-table";
 import { notFound } from "next/navigation";
 import { AccountChart } from "../_components/account-chart";
 
 export default async function AccountPage({ params }) {
-  const accountData = await getAccountWithTransactions(params.id);
+  const { id } = await params; // ✅ Await `params`
+
+  const accountData = await getAccountWithTransactions(id);
 
   if (!accountData) {
     notFound();
@@ -23,8 +24,7 @@ export default async function AccountPage({ params }) {
             {account.name}
           </h1>
           <p className="text-muted-foreground">
-            {account.type.charAt(0) + account.type.slice(1).toLowerCase()}{" "}
-            Account
+            {account.type.charAt(0) + account.type.slice(1).toLowerCase()} Account
           </p>
         </div>
 
@@ -38,25 +38,15 @@ export default async function AccountPage({ params }) {
         </div>
       </div>
 
-      {/* Chart Section*/}
-      <Suspense
-        fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea" />}
-      >
+      {/* Chart Section */}
+      <Suspense fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea" />}>
         <AccountChart transactions={transactions} />
-      </Suspense> 
+      </Suspense>
 
       {/* Transactions Table */}
-       <Suspense
-        fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea" />}
-      >
-        <TransactionTable
-          transactions={transactions}
-          onDelete={async (ids) => {
-            "use server";
-            await bulkDeleteTransactions(ids);
-          }}
-        />
-      </Suspense> 
+      <Suspense fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea" />}>
+        <TransactionTable transactions={transactions} />
+      </Suspense>
     </div>
   );
 }
